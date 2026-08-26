@@ -1,0 +1,122 @@
+/* ═══════════════════════════════════════════════
+   calculations.js — RF-05/06/07/08: Power, Energy,
+                     Projections, Costs
+   ═══════════════════════════════════════════════ */
+
+function initCalculations() {
+    // Bind projection config inputs → state → recalculate
+    const dpmInput = document.getElementById('days-per-month');
+    const mpyInput = document.getElementById('months-per-year');
+    const cuInput = document.getElementById('unit-cost');
+
+    dpmInput.addEventListener('input', () => {
+        const v = parseInt(dpmInput.value);
+        if (v >= 1 && v <= 31) APP.state.config.daysPerMonth = v;
+        updateCalculations();
+    });
+
+    mpyInput.addEventListener('input', () => {
+        const v = parseInt(mpyInput.value);
+        if (v >= 1 && v <= 12) APP.state.config.monthsPerYear = v;
+        updateCalculations();
+    });
+
+    cuInput.addEventListener('input', () => {
+        const v = parseInt(cuInput.value);
+        if (v >= 1) APP.state.config.unitCost = v;
+        updateCalculations();
+    });
+}
+
+// ───── CORE CALCULATIONS ─────
+
+/** RF-05: Installed Power — Pinst = Σ (Ni × Pi) */
+function calcInstalledPower() {
+    return APP.state.loads.reduce((sum, l) => sum + l.quantity * l.power, 0);
+}
+
+/** RF-06: Hourly Profile — P(h) = Σ (Ni × Pi) for loads active at h */
+function calcHourlyProfile() {
+    const profile = new Array(24).fill(0);
+    APP.state.loads.forEach(load => {
+        const pTotal = load.quantity * load.power;
+        load.hours.forEach(h => {
+            profile[h] += pTotal;
+        });
+    });
+    return profile;
+}
+
+/** RF-05: Maximum Simultaneous Demand — Pmax = max[P(h)] */
+function calcMaxDemand(profile) {
+    return Math.max(0, ...profile);
+}
+
+/** Load-specific Energy Getters */
+function getLoadEd(load) {
+    const pTotal = load.quantity * load.power;
+    return (pTotal * load.hours.length) / 1000;
+}
+
+/** RF-06: Daily Energy — Ed = Σ P(h) · Δt / 1000, Δt = 1h */
+function calcDailyEnergy(profile) {
+    return profile.reduce((sum, p) => sum + p, 0) / 1000;
+}
+
+/** RF-07: Monthly Energy — Em = Σ (Ed_load × days/month_load) */
+function calcMonthlyEnergy() {
+    return APP.state.loads.reduce((sum, load) => {
+        const dpm = load.daysPerMonth || APP.state.config.daysPerMonth;
+        return sum + (getLoadEd(load) * dpm);
+    }, 0);
+}
+
+/** RF-07: Annual Energy — Ea = Σ (Em_load × months/year_load) */
+function calcAnnualEnergy() {
+    return APP.state.loads.reduce((sum, load) => {
+        const dpm = load.daysPerMonth || APP.state.config.daysPerMonth;
+        const mpy = load.monthsPerYear || APP.state.config.monthsPerYear;
+        const em = getLoadEd(load) * dpm;
+        return sum + (em * mpy);
+    }, 0);
+}
+
+/** RF-08: Cost = Energy × CU */
+function calcCost(energyKwh) {
+    return energyKwh * APP.state.config.unitCost;
+}
+
+// ───── UPDATE UI ─────
+
+function updateCalculations() {
+    const profile = calcHourlyProfile();
+    const pinst = calcInstalledPower();
+    const pmax = calcMaxDemand(profile);
+    const ed = calcDailyEnergy(profile);
+    const em = calcMonthlyEnergy();
+    const ea = calcAnnualEnergy();
+
+    // KPI Cards
+    document.getElementById('kpi-pinst').textContent = `${pinst.toLocaleString('es-CO')} W`;
+    document.getElementById('kpi-pinst-kw').textContent = `${(pinst / 1000).toFixed(2)} kW`;
+    document.getElementById('kpi-pmax').textContent = `${pmax.toLocaleString('es-CO')} W`;
+    document.getElementById('kpi-pmax-kw').textContent = `${(pmax / 1000).toFixed(2)} kW`;
+    document.getElementById('kpi-ed').textContent = `${ed.toFixed(2)} kWh/día`;
+    document.getElementById('kpi-em').textContent = `${em.toFixed(2)} kWh/mes`;
+    document.getElementById('kpi-ea').textContent = `${ea.toFixed(2)} kWh/año`;
+
+    // Cost estimates
+    document.getElementById('cost-daily').textContent = formatCOP(calcCost(ed));
+    document.getElementById('cost-monthly').textContent = formatCOP(calcCost(em));
+    document.getElementById('cost-annual').textContent = formatCOP(calcCost(ea));
+
+    // Update chart
+    if (typeof updateChart === 'function') updateChart(profile);
+}
+
+/** Restore config UI from state (used after loading a file) */
+function restoreConfigUI() {
+    document.getElementById('days-per-month').value = APP.state.config.daysPerMonth;
+    document.getElementById('months-per-year').value = APP.state.config.monthsPerYear;
+    document.getElementById('unit-cost').value = APP.state.config.unitCost;
+}
