@@ -803,6 +803,24 @@ body::before {
     color: var(--accent);
 }
 
+.cost-unit-input-group input {
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-sm);
+    padding: 0.45rem 0.75rem;
+    color: var(--text-primary);
+    font-family: var(--font);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    outline: none;
+}
+
+.cost-unit-input-group input:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
 /* ───── DAY/NIGHT BAR ───── */
 .daynight-bar-wrapper {
     margin-top: 1.25rem;
@@ -993,6 +1011,7 @@ body::before {
     .timeslot-input { flex-wrap: wrap; }
     .kpi-grid { grid-template-columns: 1fr 1fr; }
     .cost-grid { grid-template-columns: 1fr; }
+    .cost-unit-input-group { width: 100%; justify-content: space-between; margin-top: 0.5rem; }
     .card-header { padding: 1rem 1rem 0; }
     .card-body { padding: 1rem; }
 }

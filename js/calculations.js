@@ -4,28 +4,15 @@
    ═══════════════════════════════════════════════ */
 
 function initCalculations() {
-    // Bind projection config inputs → state → recalculate
-    const dpmInput = document.getElementById('days-per-month');
-    const mpyInput = document.getElementById('months-per-year');
+    // Bind unit cost input in Resultados tab → state → recalculate
     const cuInput = document.getElementById('unit-cost');
-
-    dpmInput.addEventListener('input', () => {
-        const v = parseInt(dpmInput.value);
-        if (v >= 1 && v <= 31) APP.state.config.daysPerMonth = v;
-        updateCalculations();
-    });
-
-    mpyInput.addEventListener('input', () => {
-        const v = parseInt(mpyInput.value);
-        if (v >= 1 && v <= 12) APP.state.config.monthsPerYear = v;
-        updateCalculations();
-    });
-
-    cuInput.addEventListener('input', () => {
-        const v = parseInt(cuInput.value);
-        if (v >= 1) APP.state.config.unitCost = v;
-        updateCalculations();
-    });
+    if (cuInput) {
+        cuInput.addEventListener('input', () => {
+            const v = parseInt(cuInput.value);
+            if (v >= 1) APP.state.config.unitCost = v;
+            updateCalculations();
+        });
+    }
 }
 
 // ───── CORE CALCULATIONS ─────
@@ -116,7 +103,13 @@ function updateCalculations() {
 
 /** Restore config UI from state (used after loading a file) */
 function restoreConfigUI() {
-    document.getElementById('days-per-month').value = APP.state.config.daysPerMonth;
-    document.getElementById('months-per-year').value = APP.state.config.monthsPerYear;
-    document.getElementById('unit-cost').value = APP.state.config.unitCost;
+    const defaultDpm = document.getElementById('default-days-per-month');
+    const defaultMpy = document.getElementById('default-months-per-year');
+    const unitCost = document.getElementById('unit-cost');
+
+    if (defaultDpm) defaultDpm.value = APP.state.config.daysPerMonth;
+    if (defaultMpy) defaultMpy.value = APP.state.config.monthsPerYear;
+    if (unitCost) unitCost.value = APP.state.config.unitCost;
+
+    if (typeof updateFrequencyHints === 'function') updateFrequencyHints();
 }

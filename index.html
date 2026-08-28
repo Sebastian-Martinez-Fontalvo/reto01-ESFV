@@ -136,6 +136,25 @@
         <section id="tab-cargas" class="tab-panel" role="tabpanel">
             <div class="card fade-in">
                 <div class="card-header">
+                    <h2>Frecuencia de Operación por Defecto</h2>
+                    <p class="card-description">Establece los días y meses de operación estándar para todas las cargas (puedes personalizar cargas individuales en el formulario).</p>
+                </div>
+                <div class="card-body">
+                    <div class="form-grid cols-2">
+                        <div class="form-group">
+                            <label for="default-days-per-month">Días de operación / mes (por defecto)</label>
+                            <input type="number" id="default-days-per-month" min="1" max="31" step="1" value="30">
+                        </div>
+                        <div class="form-group">
+                            <label for="default-months-per-year">Meses de operación / año (por defecto)</label>
+                            <input type="number" id="default-months-per-year" min="1" max="12" step="1" value="12">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card fade-in">
+                <div class="card-header">
                     <h2 id="form-title">Agregar Carga</h2>
                 </div>
                 <div class="card-body">
@@ -173,13 +192,13 @@
 
                         <div class="form-grid cols-2" style="margin-top: 1rem;">
                             <div class="form-group">
-                                <label>Días / Mes (Opcional)</label>
-                                <p class="field-hint">En blanco usa global</p>
+                                <label for="load-dpm">Días / Mes (Específico)</label>
+                                <p class="field-hint" id="hint-load-dpm">En blanco usa por defecto (30 d/m)</p>
                                 <input type="number" id="load-dpm" min="1" max="31" step="1" placeholder="Ej: 20">
                             </div>
                             <div class="form-group">
-                                <label>Meses / Año (Opcional)</label>
-                                <p class="field-hint">En blanco usa global</p>
+                                <label for="load-mpy">Meses / Año (Específico)</label>
+                                <p class="field-hint" id="hint-load-mpy">En blanco usa por defecto (12 m/a)</p>
                                 <input type="number" id="load-mpy" min="1" max="12" step="1" placeholder="Ej: 12">
                             </div>
                         </div>
@@ -273,29 +292,6 @@
                 </div>
             </div>
 
-            <!-- Projection Config -->
-            <div class="card fade-in">
-                <div class="card-header">
-                    <h2>Parámetros de Proyección</h2>
-                </div>
-                <div class="card-body">
-                    <div class="form-grid cols-3">
-                        <div class="form-group">
-                            <label for="days-per-month">Días de operación / mes</label>
-                            <input type="number" id="days-per-month" min="1" max="31" step="1" value="30">
-                        </div>
-                        <div class="form-group">
-                            <label for="months-per-year">Meses de operación / año</label>
-                            <input type="number" id="months-per-year" min="1" max="12" step="1" value="12">
-                        </div>
-                        <div class="form-group">
-                            <label for="unit-cost">Costo Unitario CU (COP/kWh)</label>
-                            <input type="number" id="unit-cost" min="1" step="1" value="890">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- 24h Profile Chart -->
             <div class="card fade-in">
                 <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
@@ -311,8 +307,12 @@
 
             <!-- Cost Summary -->
             <div class="card fade-in">
-                <div class="card-header">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
                     <h2>Estimación de Costos</h2>
+                    <div class="cost-unit-input-group" style="display: flex; align-items: center; gap: 0.6rem;">
+                        <label for="unit-cost" style="font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); white-space: nowrap;">Costo Unitario CU (COP/kWh):</label>
+                        <input type="number" id="unit-cost" min="1" step="1" value="890" style="width: 140px; text-align: right;">
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="cost-grid">

@@ -15,8 +15,8 @@ function generateReport() {
     const pinst = calcInstalledPower();
     const pmax = calcMaxDemand(profile);
     const ed = calcDailyEnergy(profile);
-    const em = calcMonthlyEnergy(ed);
-    const ea = calcAnnualEnergy(em);
+    const em = calcMonthlyEnergy();
+    const ea = calcAnnualEnergy();
     const { daysPerMonth, monthsPerYear, unitCost } = APP.state.config;
 
     // Generate high-resolution chart image using an offscreen canvas

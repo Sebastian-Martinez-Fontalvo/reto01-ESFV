@@ -38,12 +38,18 @@ const translations = {
         'Noche': 'Night',
 
         // Load Table Tab
+        'Frecuencia de Operación por Defecto': 'Default Operating Frequency',
+        'Establece los días y meses de operación estándar para todas las cargas (puedes personalizar cargas individuales en el formulario).': 'Sets standard operating days and months for all loads (you can customize individual loads in the form).',
+        'Días de operación / mes (por defecto)': 'Operating days / month (default)',
+        'Meses de operación / año (por defecto)': 'Operating months / year (default)',
         'Agregar Carga': 'Add Load',
         'Descripción': 'Description',
         'Cantidad': 'Quantity',
         'Potencia Unitaria (W)': 'Unit Power (W)',
         'Horario de Uso': 'Schedule of Use',
         'Agregue una o más franjas horarias. Admite cruces de medianoche (ej: 22:00 – 06:00).': 'Add one or more time slots. Supports midnight crossing (e.g. 22:00 – 06:00).',
+        'Días / Mes (Específico)': 'Days / Month (Specific)',
+        'Meses / Año (Específico)': 'Months / Year (Specific)',
         'Días / Mes (Opcional)': 'Days / Month (Optional)',
         'Meses / Año (Opcional)': 'Months / Year (Optional)',
         'En blanco usa global': 'Leave blank for global',
@@ -73,6 +79,7 @@ const translations = {
         'Días de operación / mes': 'Days of operation / month',
         'Meses de operación / año': 'Months of operation / year',
         'Costo Unitario CU (COP/kWh)': 'Unit Cost (COP/kWh)',
+        'Costo Unitario CU (COP/kWh):': 'Unit Cost (COP/kWh):',
         'Perfil de Demanda — 24 Horas': 'Demand Profile — 24 Hours',
         'Área': 'Area',
         'Barras': 'Bars',
@@ -189,6 +196,7 @@ function toggleLanguage() {
     updateUITexts();
     
     // Render loads to translate dynamic elements like badges and table rows
+    if (typeof updateFrequencyHints === 'function') updateFrequencyHints();
     if (typeof renderLoads === 'function') renderLoads();
     if (typeof recalculateAll === 'function') recalculateAll();
 }

@@ -6,9 +6,58 @@
 let currentTimeSlots = []; // [{start: 6, end: 18}, ...]
 
 function initLoads() {
+    bindDefaultFrequency();
     buildTimeSlotSelectors();
     bindLoadForm();
     renderLoads();
+    updateFrequencyHints();
+}
+
+// ───── DEFAULT FREQUENCY ─────
+
+function bindDefaultFrequency() {
+    const dpmInput = document.getElementById('default-days-per-month');
+    const mpyInput = document.getElementById('default-months-per-year');
+
+    if (dpmInput) {
+        dpmInput.value = APP.state.config.daysPerMonth;
+        dpmInput.addEventListener('input', () => {
+            const v = parseInt(dpmInput.value);
+            if (v >= 1 && v <= 31) {
+                APP.state.config.daysPerMonth = v;
+                updateFrequencyHints();
+                renderLoads();
+                recalculateAll();
+            }
+        });
+    }
+
+    if (mpyInput) {
+        mpyInput.value = APP.state.config.monthsPerYear;
+        mpyInput.addEventListener('input', () => {
+            const v = parseInt(mpyInput.value);
+            if (v >= 1 && v <= 12) {
+                APP.state.config.monthsPerYear = v;
+                updateFrequencyHints();
+                renderLoads();
+                recalculateAll();
+            }
+        });
+    }
+}
+
+function updateFrequencyHints() {
+    const dpm = APP.state.config.daysPerMonth || 30;
+    const mpy = APP.state.config.monthsPerYear || 12;
+    const isEn = window.APP_LANG === 'en';
+    const hintDpm = document.getElementById('hint-load-dpm');
+    const hintMpy = document.getElementById('hint-load-mpy');
+    if (hintDpm) {
+        hintDpm.textContent = isEn ? `Leave blank for default (${dpm} d/m)` : `En blanco usa por defecto (${dpm} d/m)`;
+    }
+    if (hintMpy) {
+        hintMpy.textContent = isEn ? `Leave blank for default (${mpy} m/y)` : `En blanco usa por defecto (${mpy} m/a)`;
+    }
 }
 
 // ───── TIME SLOT SELECTORS ─────
@@ -208,6 +257,7 @@ function resetLoadForm() {
     document.getElementById('load-mpy').value = '';
     clearTimeSlots();
     clearAllErrors();
+    updateFrequencyHints();
     // Reset selectors to sensible defaults
     document.getElementById('slot-start').value = 6;
     document.getElementById('slot-end').value = 18;
