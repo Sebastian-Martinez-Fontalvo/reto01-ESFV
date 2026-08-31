@@ -48,8 +48,8 @@ Aplicación **Windows** compilada con **MATLAB Compiler (R2026a)**. El ejecutabl
 
 ### Cómo ejecutarla
 
-1. **Requisito**: instala el **MATLAB Runtime R2026a** (descárgalo en https://www.mathworks.com/products/compiler/mcr/index.html o mediante el instalador incluido; requiere permisos de administrador).
-2. Ejecuta `desktop/PlaneacionSolarPractica.exe` (o `desktop/MyAppInstaller.exe` para instalarla en el sistema).
+1. Ejecuta `desktop/MyAppInstaller.exe` (el instalador incluye el runtime, no hace falta instalar MATLAB por separado; requiere permisos de administrador).
+2. Ejecuta `desktop/PlaneacionSolarPractica.exe` (o, si tienes MATLAB R2026a instalado en el equipo, sirve como equivalente del runtime).
 
 > ⚠️ Los archivos `.exe` **solo funcionan en Windows** (no en Linux/macOS).
 

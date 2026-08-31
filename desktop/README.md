@@ -22,20 +22,17 @@ desktop/
 
 ## Cómo ejecutarlo
 
-### Requisito previo: MATLAB Runtime
+### Requisito previo
 
-La app necesita el **MATLAB Runtime R2026a** instalado en el equipo. Si no lo tienes:
+La app necesita el **MATLAB Runtime R2026a** para ejecutarse, pero **no hace falta instalarlo por separado**: puedes instalar todo desde el propio instalador `MyAppInstaller.exe`, que lo incluye automáticamente.
 
-- Descárgalo en: https://www.mathworks.com/products/compiler/mcr/index.html
-- O, si el instalador `MyAppInstaller.exe` incluye el runtime, instálalo con él.
-- Se requieren **derechos de administrador** para instalar el runtime.
+- Si **no tienes MATLAB**, ejecuta `MyAppInstaller.exe` y el instalador se encargará de instalar el runtime por ti.
+- Si **tienes MATLAB R2026a** instalado en el equipo, también es válido como equivalente del runtime (o puedes descargar el runtime en https://www.mathworks.com/products/compiler/mcr/index.html).
 
 ### Ejecución
 
-1. Instala el MATLAB Runtime R2026a (ver requisito previo).
+1. Si aún no tienes el runtime/MATLAB R2026a, ejecuta `MyAppInstaller.exe` (instala la app y el runtime; requiere permisos de administrador).
 2. Ejecuta `PlaneacionSolarPractica.exe` con **doble clic**.
-
-> Alternativa: ejecuta `MyAppInstaller.exe` para instalar la aplicación en el sistema y luego ábrela desde el acceso directo.
 
 ### Plataforma
 
