@@ -12,9 +12,15 @@ Todo se ejecuta **100% en el navegador**: no requiere servidor, ni instalación 
 
 ## Cómo ejecutarla
 
-### Opción A — En línea (GitHub Pages)
+### Opción A — En línea (despliegue)
 
-Prueba rápida sin descargar nada:
+La app web está desplegada y se puede probar sin descargar nada:
+
+**Despliegue principal (Vercel):**
+
+> **https://ensoldidactico.vercel.app/**
+
+**Alternativa (GitHub Pages):**
 
 > **https://sebastian-martinez-fontalvo.github.io/reto01-ESFV/web/**
 

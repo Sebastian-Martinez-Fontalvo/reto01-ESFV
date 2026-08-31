@@ -19,7 +19,11 @@ Aplicación de una sola página (sin frameworks). Se ejecuta **100% en el navega
 
 ### Cómo ejecutarla
 
-**En línea (GitHub Pages)** — prueba rápida sin descargar nada:
+**En línea (despliegue principal — Vercel):**
+
+> **https://ensoldidactico.vercel.app/**
+
+**Alternativa en GitHub Pages:**
 
 > **https://sebastian-martinez-fontalvo.github.io/reto01-ESFV/web/**
 
