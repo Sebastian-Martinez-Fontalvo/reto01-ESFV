@@ -2,107 +2,91 @@
 
 **Planeación Solar Práctica: Caracterización de Demanda Energética**
 
-Aplicación web de una sola página (HTML/CSS/JS sin frameworks) para automatizar el **Reto 1** del curso de Sistemas Fotovoltaicos: recopilación y análisis de los datos de consumo energético de un cliente.
+Herramienta para automatizar el **Reto 1** del curso de Sistemas Fotovoltaicos: recopilación y análisis de los datos de consumo energético de un cliente.
 
-Todo se ejecuta **100% en el navegador** (lado cliente): no requiere servidor, ni instalación de dependencias, ni compilación.
+Este repositorio contiene **dos aplicaciones** que comparten la misma lógica de cálculo (cumpliendo el **RF-12: doble presentación**):
 
----
-
-## Funcionalidades
-
-- **Proyecto**: datos del proyecto, integrantes, fecha y tipo de sistema (off-grid, on-grid, híbrido).
-- **Cuadro de Cargas**: tabla interactiva para agregar equipos (descripción, cantidad, potencia unitaria y franjas horarias de 24 h). Clasificación automática diurna / nocturna / mixta con validación de datos.
-- **Resultados**: potencia instalada, demanda máxima, perfil de demanda de 24 h (gráfico con Chart.js), proyección de consumo (diario/mensual/anual) y costos de energía.
-- **Reporte**: informe ejecutivo imprimible / exportable a PDF.
-- **Persistence**: guardar y cargar el proyecto como archivo `.json`.
-- **Extras**: interfaz en español e inglés, modo claro/oscuro.
+| Carpeta | App | Plataforma | Tecnología |
+|---------|-----|-----------|------------|
+| [`web/`](web/) | Aplicación web | Navegador (Windows, Mac, Linux) | HTML + CSS + JavaScript |
+| [`desktop/`](desktop/) | Aplicación de escritorio | Windows | MATLAB Compiler (R2026a) |
 
 ---
 
-## Cómo ejecutarlo
+## 🖥️ App Web (`web/`)
 
-### Opción A — En la web (GitHub Pages)
+Aplicación de una sola página (sin frameworks). Se ejecuta **100% en el navegador**: no requiere servidor, instalación ni compilación.
 
-El proyecto está publicado y se puede probar en línea sin descargar nada:
+### Cómo ejecutarla
 
-> **https://sebastian-martinez-fontalvo.github.io/reto01-ESFV/**
+**En línea (GitHub Pages)** — prueba rápida sin descargar nada:
 
-Solo abre el enlace en cualquier navegador moderno (Chrome, Edge, Firefox, Safari).
+> **https://sebastian-martinez-fontalvo.github.io/reto01-ESFV/web/**
 
-### Opción B — Localmente (desde la carpeta)
+**Localmente** — clona el repo y abre `web/index.html` con doble clic (o arrástralo al navegador):
 
-1. Descarga y descomprime el repositorio (o clónalo):
-   ```bash
-   git clone https://github.com/Sebastian-Martinez-Fontalvo/reto01-ESFV.git
-   cd reto01-ESFV
-   ```
-2. Abre el archivo `index.html` directamente en tu navegador (**doble clic** sobre él) o arrástralo a una ventana del navegador.
+```bash
+git clone https://github.com/Sebastian-Martinez-Fontalvo/reto01-ESFV.git
+cd reto01-ESFV/web
+```
 
-> No hace falta ningún servidor ni comando adicional: al ser una aplicación estática, se ejecuta abriendo `index.html`.
+**Con servidor local** (opcional, para desarrollo):
 
-### Opción C — Con un servidor local (opcional, recomendado para desarrollo)
+```bash
+python3 -m http.server 8000      # luego abre http://localhost:8000
+# o
+npx serve .
+```
 
-Si trabajas con las herramientas de desarrollo o prefieres una URL real:
-
-- Con **Python**:
-  ```bash
-  python3 -m http.server 8000
-  ```
-  Luego abre `http://localhost:8000`.
-
-- Con **Node.js**:
-  ```bash
-  npx serve .
-  ```
-  Luego abre la URL que indique la consola.
+> 📘 Manual detallado de la app web: [`web/README.md`](web/README.md)
 
 ---
 
-## Estructura del proyecto
+## 💻 App de Escritorio (`desktop/`)
+
+Aplicación **Windows** compilada con **MATLAB Compiler (R2026a)**. El ejecutable está en `desktop/PlaneacionSolarPractica.exe`.
+
+### Cómo ejecutarla
+
+1. **Requisito**: instala el **MATLAB Runtime R2026a** (descárgalo en https://www.mathworks.com/products/compiler/mcr/index.html o mediante el instalador incluido; requiere permisos de administrador).
+2. Ejecuta `desktop/PlaneacionSolarPractica.exe` (o `desktop/MyAppInstaller.exe` para instalarla en el sistema).
+
+> ⚠️ Los archivos `.exe` **solo funcionan en Windows** (no en Linux/macOS).
+
+> 📘 Manual detallado: [`desktop/README.md`](desktop/README.md)
+
+---
+
+## Estructura del repositorio
 
 ```
 reto01-ESFV/
-├── index.html              ← página principal (abre este archivo)
-├── css/
-│   └── styles.css          ← estilos (tema oscuro, diseño moderno)
-├── js/
-│   ├── app.js              ← controlador principal, navegación por pestañas
-│   ├── project.js          ← gestión de datos del proyecto (RF-01)
-│   ├── loads.js            ← cuadro de cargas CRUD y validación (RF-02/03/04/09)
-│   ├── calculations.js     ← potencia, energía, perfil, proyecciones y costos
-│   ├── chart.js            ← gráfico de perfil de 24 h (Chart.js)
-│   ├── persistence.js      ← guardar/cargar proyecto en JSON (RF-10)
-│   ├── excel.js            ← exportación a Excel
-│   ├── report.js           ← informe ejecutivo imprimible (RF-11)
-│   ├── i18n.js             ← español / inglés
-│   └── logo_data.js        ← logo en base64
-├── img/
-│   └── logo.png, logo.jpg, logo_base64.txt
-└── implementation_plan.md  ← plan de implementación y detalle técnico
+├── README.md               ← este archivo (manual general)
+├── web/                    ← 🖥️ aplicación web
+│   ├── index.html          ← página principal
+│   ├── css/                ← estilos
+│   ├── js/                 ← lógica (app, calculations, chart, excel, i18n, ...)
+│   ├── img/                ← imágenes y logo
+│   └── implementation_plan.md
+└── desktop/                ← 💻 aplicación de escritorio (Windows)
+    ├── PlaneacionSolarPractica.exe   ← ejecutable
+    ├── MyAppInstaller.exe            ← instalador
+    ├── readme.txt                    ← instrucciones de MATLAB Compiler
+    ├── splash.png                    ← imagen de inicio
+    ├── build/                        ← logs de compilación
+    └── package/                      ← registro del instalador
 ```
 
 ---
 
-## Dependencias (CDN)
+## Funcionalidades (comunes a ambas apps)
 
-El proyecto carga las siguientes librerías desde CDN (requiere conexión a internet al abrirlo):
-
-- [Chart.js](https://www.chartjs.org/) — gráfico del perfil de demanda.
-- [html2pdf.js](https://github.com/eKoopmans/html2pdf.js) — generación de PDF del reporte.
-- [xlsx-js-style](https://github.com/SheetJS) — exportación a Excel.
-
----
-
-## Verificación rápida (modo prueba)
-
-Para probar la aplicación de forma rápida:
-
-1. Abre la app (Online o local).
-2. Ve a la pestaña **📋 Proyecto** y completa los campos (nombre, tipo de sistema, etc.).
-3. Ve a **⚡ Cuadro de Cargas** y agrega 2–3 equipos de ejemplo (ej. "Foco LED – 10 W", "Refrigerador – 150 W"), marcando sus franjas horarias.
-4. Ve a **📊 Resultados** y comprueba que la potencia instalada, el perfil de 24 h, el consumo y los costos se calculan automáticamente.
-5. Prueba **💾 Guardar** (exporta `.json`) y **Cargar** (importa de nuevo) para verificar la persistencia.
-6. Prueba **📄 Reporte** para generar el informe imprimible/PDF.
+- **Proyecto**: datos del proyecto, integrantes, fecha y tipo de sistema (off-grid, on-grid, híbrido).
+- **Cuadro de Cargas**: tabla interactiva de equipos (descripción, cantidad, potencia y franjas horarias de 24 h). Clasificación diurna / nocturna / mixta con validación.
+- **Resultados**: potencia instalada, demanda máxima, perfil de demanda de 24 h, proyección de consumo (diario/mensual/anual) y costos de energía.
+- **Reporte**: informe ejecutivo imprimible / exportable a PDF.
+- **Persistence**: guardar y cargar el proyecto como archivo `.json`.
+- **Extras**: interfaz en español e inglés, modo claro/oscuro.
 
 ---
 
