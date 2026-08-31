@@ -49,12 +49,24 @@ Solo abre el enlace en cualquier navegador moderno (Chrome, Edge, Firefox, Safar
 
 ## Funcionalidades
 
-- **Proyecto**: datos del proyecto, integrantes, fecha y tipo de sistema (off-grid, on-grid, híbrido).
-- **Cuadro de Cargas**: tabla interactiva para agregar equipos (descripción, cantidad, potencia unitaria y franjas horarias de 24 h). Clasificación automática diurna / nocturna / mixta con validación de datos.
-- **Resultados**: potencia instalada, demanda máxima, perfil de demanda de 24 h (gráfico con Chart.js), proyección de consumo (diario/mensual/anual) y costos de energía.
-- **Reporte**: informe ejecutivo imprimible / exportable a PDF.
-- **Persistence**: guardar y cargar el proyecto como archivo `.json`.
-- **Extras**: interfaz en español e inglés, modo claro/oscuro.
+La app web cumple los requisitos funcionales **RF-01 a RF-12** de los [términos de referencia del Reto 01](https://energia-solar-fotovoltaica-2026-ii):
+
+| ID | Función | Estado |
+|----|---------|--------|
+| RF-01 | Proyecto y contexto (off-grid, on-grid, híbrido off-grid, híbrido on-grid) | ✅ |
+| RF-02 | Cuadro de cargas (agregar, editar, eliminar) | ✅ |
+| RF-03 | Franjas horarias (múltiples intervalos, cruce de medianoche, resolución 1 h) | ✅ |
+| RF-04 | Clasificación diurna / nocturna / mixta configurable | ✅ |
+| RF-05 | Potencia instalada y demanda máxima, por separado | ✅ |
+| RF-06 | Energía diaria y perfil horario 24 h (gráfico) | ✅ |
+| RF-07 | Proyección diaria, mensual y anual (días de operación configurables) | ✅ |
+| RF-08 | Costo de energía con CU [$/kWh] de entrada | ✅ |
+| RF-09 | Validación de datos | ✅ |
+| RF-10 | Persistencia (guardar/cargar `.json`) | ✅ |
+| RF-11 | Informe ejecutivo de una página (imprimible/PDF) | ✅ |
+| RF-12 | Despliegue dual (web + escritorio equivalentes) | ✅ |
+
+Para un detalle por pestaña:
 
 ---
 

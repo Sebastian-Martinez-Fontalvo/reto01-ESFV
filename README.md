@@ -79,14 +79,33 @@ reto01-ESFV/
 
 ---
 
-## Funcionalidades (comunes a ambas apps)
+## Funcionalidades
+
+Considera los [términos de referencia del Reto 01](https://energia-solar-fotovoltaica-2026-ii) de **Energía Solar Fotovoltaica · 2026-II**. Ambas aplicaciones (web y escritorio) cubren los requisitos funcionales **RF-01 a RF-12** con la misma lógica de cálculo.
+
+| ID | Función | Estado |
+|----|---------|--------|
+| RF-01 | **Proyecto y contexto**: nombre/ID del proyecto, integrantes, fecha y tipo de aplicación (off-grid, on-grid, híbrido off-grid, híbrido on-grid) | ✅ |
+| RF-02 | **Cuadro de cargas**: agregar, editar y eliminar cargas (descripción, cantidad, potencia unitaria [W], horarios de uso) | ✅ |
+| RF-03 | **Franjas horarias**: uno o varios intervalos por carga, discontinuos y que cruzan la medianoche; resolución mínima 1 h | ✅ |
+| RF-04 | **Clasificación temporal**: diurna / nocturna / mixta, con criterio horario visible y configurable (día/noche por defecto 06:00–18:00) | ✅ |
+| RF-05 | **Potencia**: potencia instalada total [W/kW] y demanda máxima simultánea [W/kW], mostradas por separado | ✅ |
+| RF-06 | **Energía y perfil 24 h**: energía diaria [kWh/día] y perfil horario de potencia (00:00–23:00) con gráfico | ✅ |
+| RF-07 | **Proyección de consumo**: consumo diario, mensual y anual, con días de operación configurables (sin supuestos ocultos) | ✅ |
+| RF-08 | **Costo de energía**: costo unitario CU [$/kWh] como dato de entrada; costo diario, mensual y anual | ✅ |
+| RF-09 | **Validación**: impide datos inválidos (cantidades/potencias negativas, intervalos incorrectos, campos vacíos, duplicidades) | ✅ |
+| RF-10 | **Persistencia**: guardar y recuperar el proyecto como archivo estructurado (`.json`) | ✅ |
+| RF-11 | **Informe automático**: informe ejecutivo de una página (datos del proyecto, contexto, cuadro resumido, indicadores, perfil 24 h, costos) | ✅ |
+| RF-12 | **Despliegue dual**: versiones web y escritorio con la misma lógica, unidades, resultados y flujo | ✅ |
+
+### Principales funcionalidades de la interfaz
 
 - **Proyecto**: datos del proyecto, integrantes, fecha y tipo de sistema (off-grid, on-grid, híbrido).
 - **Cuadro de Cargas**: tabla interactiva de equipos (descripción, cantidad, potencia y franjas horarias de 24 h). Clasificación diurna / nocturna / mixta con validación.
 - **Resultados**: potencia instalada, demanda máxima, perfil de demanda de 24 h, proyección de consumo (diario/mensual/anual) y costos de energía.
 - **Reporte**: informe ejecutivo imprimible / exportable a PDF.
-- **Persistence**: guardar y cargar el proyecto como archivo `.json`.
-- **Extras**: interfaz en español e inglés, modo claro/oscuro.
+- **Persistencia**: guardar y cargar el proyecto como archivo `.json`.
+- **Extras**: interfaz en español e inglés, modo claro/oscuro, importación/exportación a Excel.
 
 ---
 
